@@ -8,6 +8,9 @@ This Wagtail extension requires Wagtail 1.5.x, as it uses ``WAGTAILADMIN_RICH_TE
 Installation
 ============
 
+Run the command
+``pip install wagtailfroala``
+
 Add ``wagtailfroala`` to your ``INSTALLED_APPS``.
 
 Add ``wagtailfroala.rich_text.FroalaRichTextArea`` to ``WAGTAILADMIN_RICH_TEXT_EDITORS`` in your settings.

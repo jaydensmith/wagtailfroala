@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='wagtailfroala',
-    version='0.1',
+    version='0.2',
     packages=find_packages(),
     include_package_data=True,
     install_requires=['Django>=1.8,<1.10', 'wagtail>=1.5'],
