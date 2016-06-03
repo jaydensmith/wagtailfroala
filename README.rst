@@ -48,11 +48,13 @@ Options
 You will need to add ``FROALA_LICENSE_KEY`` to your settings:
 
 .. code-block:: python
+
     FROALA_LICENSE_KEY = 'xxxxxxxxxxxxxx';
 
 You can also specify ``FROALA_OPTIONS``, which should be a dict populated with official Froala options (https://www.froala.com/wysiwyg-editor/docs/options):
 
 .. code-block:: python
+    
     FROALA_OPTIONS = {
         'toolbarButtonsMD': ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'color'],
         'toolbarButtonsXS': ['bold', 'italic', 'underline']
