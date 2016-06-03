@@ -8,8 +8,7 @@ This Wagtail extension requires Wagtail 1.5.x, as it uses ``WAGTAILADMIN_RICH_TE
 Installation
 ============
 
-Run the command
-``pip install wagtailfroala``
+Run the command ``pip install wagtailfroala``
 
 Add ``wagtailfroala`` to your ``INSTALLED_APPS``.
 
