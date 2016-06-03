@@ -5,7 +5,6 @@ import json
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.forms import Media, widgets
-from django.utils.module_loading import import_string
 
 from wagtail.utils.widgets import WidgetWithScript
 from wagtail.wagtailadmin.edit_handlers import RichTextFieldPanel
@@ -24,11 +23,10 @@ class FroalaRichTextArea(WidgetWithScript, widgets.Textarea):
         return super(FroalaRichTextArea, self).render(name, translated_value, attrs)
 
     def render_js_init(self, id_, name, value):
-        froala_options = getattr(settings, 'FROALA_OPTIONS', {})
-        froala_options.update({
-            'key': settings.FROALA_LICENSE_KEY,
-            'scrollableContainer': '.content-wrapper'
-        })
+        froala_options = {
+            'key': settings.FROALA_LICENSE_KEY
+        }
+        froala_options.update(getattr(settings, 'FROALA_OPTIONS', {}))
         
         return "makeFroalaRichTextEditable({0}, {1});".format(
             json.dumps(id_),
@@ -43,16 +41,28 @@ class FroalaRichTextArea(WidgetWithScript, widgets.Textarea):
 
     @property
     def media(self):
-        return Media(js=[
+        js = [
             static('froala/vendor/js/froala_editor.pkgd.min.js'),
-            '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js',
-            '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js',
-            static('froala/js/froala.js'),
+        ]
 
-        ], css={
-            'all': [
-                static('froala/vendor/css/froala_editor.pkgd.min.css'),
-                '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css',
-                '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css',
-            ]
+        css = [
+            static('froala/vendor/css/froala_editor.pkgd.min.css'),
+            '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css',
+            '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css',
+        ]
+
+        if getattr(settings, 'FROALA_CODEMIRROR', True):
+            js.append('//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js')
+            js.append('//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js')
+
+            css.append('//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css')
+
+        # Maintain the order of JavaScript files.
+        js.append(static('froala/js/froala.js'))
+
+        if getattr(settings, 'FROALA_FONT_AWESOME', True):
+            css.append('//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css')
+
+        return Media(js=js, css={
+            'all': css
         })

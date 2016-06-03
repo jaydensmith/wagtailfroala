@@ -62,8 +62,21 @@ You can also specify ``FROALA_OPTIONS``, which should be a dict populated with o
         'toolbarButtonsXS': ['bold', 'italic', 'underline']
     }
 
+By default, Codemirror HTML syntax highlighting is enabled, you can disable it if you wish.
+
+.. code-block:: python
+    
+    FROALA_CODEMIRROR = False
+
+Font Awesome is required by Froala for toolbar icons, so it is included by default. If you don't want to include it or already have a version included, you can disable it.
+
+.. code-block:: python
+    
+    FROALA_FONT_AWESOME = False
+
 To Do
 -------
 - [ ] Incoorperate page chooser for links (like hallo.js).
 - [ ] Incoorperate document chooser for links (like hallo.js).
-- [ ] Incoorperate image chooser (like hallo.js).
+- [ ] Implement image replace button.
+- [ ] Incoorperate Froala events https://www.froala.com/wysiwyg-editor/docs/events.
