@@ -1,0 +1,6 @@
+include README.rst
+include intelliscale/views/icons.yml
+recursive-include intelliscale/static *
+recursive-include intelliscale/templates *
+recursive-include intelliscale/*/static *
+recursive-include intelliscale/*/templates *
