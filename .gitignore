@@ -1,0 +1,4 @@
+.virtualenv
+.idea
+/dist
+/wagtailfroala.egg-info
