@@ -76,7 +76,5 @@ Font Awesome is required by Froala for toolbar icons, so it is included by defau
 
 To Do
 -------
-- [ ] Incoorperate page chooser for links (like hallo.js).
-- [ ] Incoorperate document chooser for links (like hallo.js).
 - [ ] Implement image replace button.
 - [ ] Incoorperate Froala events https://www.froala.com/wysiwyg-editor/docs/events.
