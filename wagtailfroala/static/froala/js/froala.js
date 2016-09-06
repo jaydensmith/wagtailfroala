@@ -103,4 +103,72 @@ $.FroalaEditor.DEFAULTS.scrollableContainer = '.content-wrapper';
         },
         plugin: 'image'
     });
+
+    // Define an icon.
+    $.FE.DefineIcon('documentIcon', { NAME: 'file-text'})
+    // Override Froala's InsertFile plugin
+    $.FE.RegisterCommand('insertFile', {
+        title: 'Insert Document',
+        undo: false,
+        focus: true,
+        refreshAfterCallback: false,
+        popup: true,
+        icon: 'documentIcon',
+        callback: function () {
+            var editor = this;
+
+            editor.selection.save()
+            if (editor.selection.isCollapsed()) {
+                var text = false;
+            } else {
+                var text = editor.selection.text()
+            }
+            return ModalWorkflow({
+                url: window.chooserUrls.documentChooser,
+                responses: {
+                    documentChosen: function(documentData) {
+                        editor.link.insert(documentData.url, (text ? text : documentData.title), {
+                            'data-id': documentData.id,
+                            'data-linktype': "document"
+                        })
+                    }
+                }
+            });
+        },
+        plugin: 'link'
+    });
+
+    // Define an icon.
+    $.FE.DefineIcon('pageIcon', { NAME: 'file'})
+
+    $.FE.RegisterCommand('insertPage', {
+        title: 'Insert Page',
+        undo: false,
+        focus: true,
+        refreshAfterCallback: false,
+        popup: true,
+        icon: 'pageIcon',
+        callback: function () {
+            var editor = this;
+
+            editor.selection.save()
+            if (editor.selection.isCollapsed()) {
+                var text = false;
+            } else {
+                var text = editor.selection.text()
+            }
+            return ModalWorkflow({
+                url: window.chooserUrls.pageChooser,
+                responses: {
+                    pageChosen: function(pageData) {
+                        editor.link.insert(pageData.url, (text ? text : pageData.title), {
+                            'data-id': pageData.id,
+                            'data-linktype': "page"
+                        })
+                    }
+                }
+            });
+        },
+        plugin: 'link'
+    });
 }));
