@@ -46,6 +46,7 @@ class FroalaRichTextArea(WidgetWithScript, widgets.Textarea):
         ]
 
         css = [
+            static('froala/css/wagtailfroala.css'),
             static('froala/vendor/css/froala_editor.pkgd.min.css'),
             '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css',
             '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css',
@@ -54,7 +55,6 @@ class FroalaRichTextArea(WidgetWithScript, widgets.Textarea):
         if getattr(settings, 'FROALA_CODEMIRROR', True):
             js.append('//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js')
             js.append('//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js')
-
             css.append('//cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css')
 
         # Maintain the order of JavaScript files.
