@@ -12,6 +12,17 @@ from wagtail.wagtailcore.rich_text import DbWhitelister, expand_db_html
 
 
 class FroalaRichTextArea(WidgetWithScript, widgets.Textarea):
+    def __init__(self, **kwargs):
+        try:
+            self.options = kwargs.pop('options')
+        except KeyError:
+            self.options = {
+                'key': settings.FROALA_LICENSE_KEY
+            }
+            self.options.update(getattr(settings, 'FROALA_OPTIONS', {}))
+
+        super(FroalaRichTextArea, self).__init__(**kwargs)
+
     def get_panel(self):
         return RichTextFieldPanel
 
@@ -23,14 +34,9 @@ class FroalaRichTextArea(WidgetWithScript, widgets.Textarea):
         return super(FroalaRichTextArea, self).render(name, translated_value, attrs)
 
     def render_js_init(self, id_, name, value):
-        froala_options = {
-            'key': settings.FROALA_LICENSE_KEY
-        }
-        froala_options.update(getattr(settings, 'FROALA_OPTIONS', {}))
-        
         return "makeFroalaRichTextEditable({0}, {1});".format(
             json.dumps(id_),
-            json.dumps(froala_options)
+            json.dumps(self.options)
         )
 
     def value_from_datadict(self, data, files, name):
