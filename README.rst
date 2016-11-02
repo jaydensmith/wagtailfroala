@@ -20,8 +20,11 @@ For example, to use Froala for all ``RichTextField`` and ``RichTextBlock`` insta
 
     WAGTAILADMIN_RICH_TEXT_EDITORS = {
         'default': {
-            'WIDGET': 'wagtailfroala.rich_text.FroalaRichTextArea'
-        },
+            'WIDGET': 'wagtailfroala.rich_text.FroalaRichTextArea',
+            'OPTIONS': {
+                'key': 'xxxxxxxxxxxx'
+             }
+        }
     }
 
 Or, to use Froala only for defined instances...
@@ -33,34 +36,37 @@ Or, to use Froala only for defined instances...
             'WIDGET': 'wagtail.wagtailadmin.rich_text.HalloRichTextArea'
         },
         'froala': {
-            'WIDGET': 'wagtailfroala.rich_text.FroalaRichTextArea'
+            'WIDGET': 'wagtailfroala.rich_text.FroalaRichTextArea',
+            'OPTIONS': {
+                'key': 'xxxxxxxxxxxx',
+                'toolbarButtons': [
+                    'paragraphFormat', 'fontFamily', 'bold', 'italic',
+                    'underline', 'formatOL', 'formatUL', 'align',
+                    'color', '|', 'insertHR', 'insertLink', '|', 'undo', 'redo'
+                ]
+            }
         },
+        'froala_small': {
+            'WIDGET': 'wagtailfroala.rich_text.FroalaRichTextArea',
+            'OPTIONS': {
+                'key': 'xxxxxxxxxxxx',
+                'toolbarButtons': ['fontFamily', 'bold', 'italic', 'underline', 'color', '|', 'insertLink'],
+                'editorClass': 'editor-small'
+            }
+        }
     }
 
 .. code-block:: python
 
     html_field = RichTextField(editor='froala')
     stream_field = StreamField([
-        ('html', RichTextBlock(editor='froala'))
+        ('html', RichTextBlock(editor='froala_small'))
     ])
 
 Options
 -------
 
-You will need to add ``FROALA_LICENSE_KEY`` to your settings:
-
-.. code-block:: python
-
-    FROALA_LICENSE_KEY = 'xxxxxxxxxxxxxx'
-
-You can also specify ``FROALA_OPTIONS``, which should be a dict populated with official Froala options (https://www.froala.com/wysiwyg-editor/docs/options):
-
-.. code-block:: python
-
-    FROALA_OPTIONS = {
-        'toolbarButtonsMD': ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'color'],
-        'toolbarButtonsXS': ['bold', 'italic', 'underline']
-    }
+You will need to ensure that the ``key`` option is correctly set with your Froala license key.
 
 By default, Codemirror HTML syntax highlighting is enabled, you can disable it if you wish.
 
@@ -78,3 +84,6 @@ To Do
 -------
 - [ ] Implement image replace button.
 - [ ] Incoorperate Froala events https://www.froala.com/wysiwyg-editor/docs/events.
+
+
+Please feel free to contribute.
