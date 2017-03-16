@@ -2,6 +2,10 @@
     padding-left: 15px;
 }
 
-.fr-view ul > li, .fr-view ol > li {
-    list-style: initial;
+.fr-view ul > li {
+    list-style: disc;
+}
+
+.fr-view ol > li {
+    list-style: decimal;
 }

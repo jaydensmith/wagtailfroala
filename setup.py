@@ -10,7 +10,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='wagtailfroala',
     packages=['wagtailfroala'],
-    version='0.2.8',
+    version='0.2.9',
     author='Jayden Smith',
     author_email='jayden@intelliscale.com.au',
     include_package_data=True,
