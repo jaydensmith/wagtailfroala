@@ -10,11 +10,11 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='wagtailfroala',
     packages=['wagtailfroala'],
-    version='0.2.9',
+    version='0.2.10',
     author='Jayden Smith',
     author_email='jayden@intelliscale.com.au',
     include_package_data=True,
-    install_requires=['Django>=1.8,<1.10', 'wagtail>=1.5,<1.6'],
+    install_requires=['Django>=1.8,<2.0', 'wagtail>=1.5'],
     license='MIT License',
     description='Extends Wagtail to use the Froala WYSIWYG editor in RichTextFields/RichTextBlocks.',
     url='https://github.com/jaydensmith/wagtailfroala',
